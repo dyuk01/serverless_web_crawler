@@ -50,6 +50,7 @@ class ServerlessWebCrawlerStack(Stack):
             runtime=_lambda.Runtime.PYTHON_3_9,
             index="crawler.py",
             handler="handle",
+            # Prevents too many requests at once. (Number of requests at once)
             reserved_concurrent_executions=2,
             dead_letter_queue_enabled=True,
             dead_letter_queue=crawlerDLQ
