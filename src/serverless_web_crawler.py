@@ -19,27 +19,26 @@ class ServerlessWebCrawlerStack(Stack):
         # SourceURL (Where Did I come from?)
         # RootURL (Where Did I start?)
 
-        #Dynamo - VisitedUrls Table
-        table = _dynamodb.Table(self, "VisitedURLs",
-            table_name="VisitedURLs",
-            partition_key=_dynamodb.Attribute(name="visitedURL", type=_dynamodb.AttributeType.STRING),
+        #Dynamo - CrawledURLs Table
+        table = _dynamodb.Table(self, "CrawledURLs",
+            table_name="CrawledURLs",
+            partition_key=_dynamodb.Attribute(name="crawledURL", type=_dynamodb.AttributeType.STRING),
             sort_key=_dynamodb.Attribute(name="runId", type=_dynamodb.AttributeType.STRING),
             billing_mode=_dynamodb.BillingMode.PAY_PER_REQUEST
         )
 
         #SQS - PendingCrawls
-        crawlerQueue = _sqs.Queue(self, "Crawler", queue_name="Crawler")
-        crawlerDLQ = _sqs.Queue(self, "Crawler-DLQ", queue_name="Crawler-DLQ")
+        crawlerQueue = _sqs.Queue(self, "WebCrawlerQueue", queue_name="WebCrawlerQueue")
+        crawlerDLQ = _sqs.Queue(self, "WebCrawler-DLQ", queue_name="WebCrawler-DLQ")
 
         #Initiator
         initiatorFunction = _alambda.PythonFunction(
             self,
             "InitiatorFn",
             entry="./lambda/",
-            runtime=_lambda.Runtime.PYTHON_3_9,
+            runtime=_lambda.Runtime.PYTHON_3_12,
             index="initiator.py",
             handler="handle"
-            #environment={"VisitedURLsTableARN": table.table_arn}
         )
 
         #Crawler
@@ -47,14 +46,14 @@ class ServerlessWebCrawlerStack(Stack):
             self,
             "CrawlerFn",
             entry="./lambda/",
-            runtime=_lambda.Runtime.PYTHON_3_9,
+            runtime=_lambda.Runtime.PYTHON_3_12,
             index="crawler.py",
             handler="handle",
+
             # Prevents too many requests at once. (Number of requests at once)
             reserved_concurrent_executions=2,
             dead_letter_queue_enabled=True,
             dead_letter_queue=crawlerDLQ
-            #environment={"VisitedURLsTableARN": table.table_arn}
         )
         
 
