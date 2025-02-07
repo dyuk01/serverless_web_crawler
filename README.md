@@ -72,7 +72,12 @@ After deployment, the web crawler will automatically start processing based on t
 
 ## Testing
 To run the tests:
+```bash
+pytest
+```
 
-    ```bash
-    pytest
+## Acknowledgements
+Adapted from : https://github.com/beabetterdevv/ServerlessWebCrawler
+
+
 
