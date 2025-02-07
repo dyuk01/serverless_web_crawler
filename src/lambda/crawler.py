@@ -88,10 +88,3 @@ def fetchLinksFromURL(link: str) -> list[str]:
 def fetchVisitedCandidates(candidates: list[str], runId: str) -> list[str]:
     return batchGetItems(ddb, candidates, runId)
     
-
-# handle({"Records": {
-#    "visitedURL":"https://www.beabetterdev.com",
-#    "runId":"2022-04-23 15:48:19.737279#g12eacec-5e84-41dd-991c-1fb041a4069b",
-#    "sourceURL":"",
-#    "rootURL":"https://www.beabetterdev.com"
-# }, None)
