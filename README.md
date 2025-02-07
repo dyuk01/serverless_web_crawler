@@ -66,4 +66,6 @@ The application leverages the following AWS components:
     cdk deploy
 
 ### Usage
+After deployment, the web crawler will automatically start processing based on the defined triggers. You can monitor the progress and view the stored metadata in the DynamoDB table created during deployment.
+
 
