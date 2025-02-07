@@ -77,7 +77,7 @@ pytest
 ```
 
 ## Acknowledgements
-Adapted from : https://github.com/beabetterdevv/ServerlessWebCrawler
+- [beabetterdevv](https://github.com/beabetterdevv/ServerlessWebCrawler)
 
 
 
