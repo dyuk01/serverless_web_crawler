@@ -1,62 +1,69 @@
-# Commands
-Run your function with a test event as input
-`sam local invoke -t ./cdk.out/ServerlessWebCrawlerStack.template.json -e ./events/initiator_event.json`
+# Serverless Web Crawler – Link Identifier
 
+**Duration:** May 2024 – Jun. 2024  
+**Technologies:** AWS, Python
 
-# Welcome to your CDK Python project!
+## Overview
 
-This is a blank project for CDK development with Python.
+This project implements a scalable, serverless web crawler using AWS services. The system automatically crawls web pages, identifies key links, and stores metadata for further analysis. It is optimized for high concurrency and minimal operational overhead.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Architecture
 
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
+The application leverages the following AWS components:
 
-To manually create a virtualenv on MacOS and Linux:
+- **AWS Lambda:** Handles event-driven processing for web crawling tasks.
+- **Amazon DynamoDB:** Serves as a NoSQL storage solution for metadata.
+- **Amazon SQS (Simple Queue Service):** Manages distributed message handling to ensure reliable processing.
 
-```
-$ python3 -m venv .venv
-```
+## Features
 
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
+- **Automatic Crawling:** Initiates web crawling based on predefined triggers.
+- **Link Identification:** Extracts and identifies key links from web pages.
+- **Metadata Storage:** Stores extracted metadata, including URLs, `runID`, dates, and referring URLs, in DynamoDB.
+- **Scalability:** Designed to handle high concurrency with minimal operational overhead.
 
-```
-$ source .venv/bin/activate
-```
+## Project Structure
 
-If you are a Windows platform, you would activate the virtualenv like this:
+- **`lambda/`**: Contains AWS Lambda function code.
+- **`serverless_web_crawler/`**: Core application logic.
+- **`tests/`**: Unit and integration tests.
+- **`app.py`**: Entry point for the AWS CDK application.
+- **`cdk.json`**: Configuration file for the CDK toolkit.
+- **`requirements.txt`**: Python dependencies.
+- **`README.md`**: Project documentation.
 
-```
-% .venv\Scripts\activate.bat
-```
+## Getting Started
 
-Once the virtualenv is activated, you can install the required dependencies.
+### Prerequisites
 
-```
-$ pip install -r requirements.txt
-```
+- **Python 3.x**: Ensure Python is installed on your system.
+- **AWS Account**: Required to deploy AWS resources.
+- **AWS CLI**: For managing AWS services from the command line.
+- **AWS CDK**: To define cloud infrastructure using code.
 
-At this point you can now synthesize the CloudFormation template for this code.
+### Installation
 
-```
-$ cdk synth
-```
+1. **Clone the Repository:**
 
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
+   ```bash
+   git clone https://github.com/dyuk01/serverless_web_crawler.git
+   cd serverless_web_crawler
 
-## Useful commands
+2. **Set Up Virtual Environment**
 
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+    ```python3
+    -m venv .venv
+    source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
 
-Enjoy!
+3. **Install Dependencies**
+
+    ```bash
+    pip install -r requirements.txt
+
+4. **Deploy the Application:**
+
+    ```bash
+    cdk deploy
+
+### Usage
+
