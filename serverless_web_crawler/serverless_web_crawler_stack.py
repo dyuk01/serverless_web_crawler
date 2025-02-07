@@ -16,8 +16,8 @@ class ServerlessWebCrawlerStack(Stack):
         # Dynamo Model
         # PK: VisitedURL
         # SK: RunId#Date
-        # SourceURL (Where Did I come from?)
-        # RootURL (Where Did I start?)
+        # SourceURL 
+        # RootURL
 
         #Dynamo - VisitedUrls Table
         table = _dynamodb.Table(self, "VisitedURLs",
