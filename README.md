@@ -15,7 +15,7 @@ The application leverages the following AWS components:
 - **Amazon DynamoDB:** Serves as a NoSQL storage solution for metadata.
 - **Amazon SQS (Simple Queue Service):** Manages distributed message handling to ensure reliable processing.
 
-![Image description](./serverless_web_crawler/architecture/domainCrawler.png)
+![Image description](./serverless_web_crawler/src/serverless_web_crawler/architecture/domainCrawler.png)
 
 ## Features
 
